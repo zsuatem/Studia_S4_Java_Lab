@@ -4,7 +4,7 @@ public class Car {
     final String producer;
     final String model;
     private String plates;
-    public Double value;
+    public Double value = 10000.0;
     public Integer yearOfProduction;
 
     public Car(String producer, String model) {
