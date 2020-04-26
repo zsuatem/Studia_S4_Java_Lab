@@ -53,4 +53,12 @@ public class Animal {
             System.out.println("Thx, nice walk.    Weight: " + weight);
         }
     }
+
+    public String getSpecies() {
+        return species;
+    }
+
+    public String toString() {
+        return species + " " + name;
+    }
 }

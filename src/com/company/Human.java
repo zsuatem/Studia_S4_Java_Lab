@@ -1,5 +1,8 @@
 package com.company;
 
+import com.company.devices.Car;
+import com.company.devices.Phone;
+
 import java.sql.Timestamp;
 
 public class Human {
@@ -51,5 +54,9 @@ public class Human {
         } else {
             System.out.println("Nie stać Cię!");
         }
+    }
+
+    public String toString() {
+        return firstName + " " + lastName;
     }
 }

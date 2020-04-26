@@ -1,5 +1,8 @@
 package com.company;
 
+import com.company.devices.Car;
+import com.company.devices.Phone;
+
 public class Main {
 
     public static void main(String[] args) throws Exception {
@@ -13,7 +16,7 @@ public class Main {
         me.getLastSalaryCheckInfo();
         me.setSalary(3500.0);
         me.setCar(new Car("Toyota", "C-HR"));
-        System.out.println(me.getCar().producer + " " + me.getCar().model);
+        System.out.println(me.getCar().getProducer()+ " " + me.getCar().getModel());
 
         me.pet.takeForAWalk();
         me.pet.takeForAWalk();
@@ -22,5 +25,21 @@ public class Main {
         me.pet.takeForAWalk();
         me.pet.takeForAWalk();
         me.pet.takeForAWalk();
+
+        Car car1 = new Car("Fiat", "126p");
+        Car car2 = new Car("Fiat", "126p");
+        if (car1 == car2) {
+            System.out.println("car1 i car2 są takie same");
+        } else {
+            System.out.println("car1 i car2 nie są takie same");
+        }
+        System.out.println(car1);
+
+        me.mobile = new Phone("Samsung", "Galaxy S20");
+
+        System.out.println(me);
+        System.out.println(me.pet);
+        System.out.println(me.getCar());
+        System.out.println(me.mobile);
     }
 }
