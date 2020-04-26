@@ -8,6 +8,8 @@ public class Main {
         me.lastName = "Pawłowski";
         me.pet = new Animal("Dog");
         me.pet.name = "Haiko";
+        me.car = new Car("Toyota", "C-HR");
+        System.out.println(me.car.producer + " " + me.car.model);
 
         me.pet.takeForAWalk();
         me.pet.takeForAWalk();
