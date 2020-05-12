@@ -40,6 +40,8 @@ public class Main {
         System.out.println(me);
         System.out.println(me.pet);
         System.out.println(me.getCar());
+        me.getCar().turnOn();
         System.out.println(me.mobile);
+        me.mobile.turnOn();
     }
 }
