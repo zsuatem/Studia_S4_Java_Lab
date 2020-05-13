@@ -2,7 +2,7 @@ package com.company;
 
 import java.io.File;
 
-public class Animal {
+public class Animal implements Salleable {
     final static Double DEFAULT_WEIGHT_DOG = 4.0;
     final static Double DEFAULT_WEIGHT_LION = 190.0;
     final static Double DEFAULT_WEIGHT_MOUSE = 0.01;
@@ -12,7 +12,7 @@ public class Animal {
     final String species;
     private Double weight;
 
-    public Animal(String species) throws Exception {
+    public Animal(String species) {
         this.species = species;
 
         switch (this.species) {
@@ -24,8 +24,6 @@ public class Animal {
                 break;
             case "Lion":
                 weight = DEFAULT_WEIGHT_LION;
-            default:
-                throw new Exception("Undefined species!");
         }
     }
 
@@ -60,5 +58,18 @@ public class Animal {
 
     public String toString() {
         return species + " " + name;
+    }
+
+    @Override
+    public void sell(Human seller, Human buyer, Double price) throws Exception {
+        if (buyer.couldBuy(this, price) && seller.hasAnimal(this)) {
+            buyer.pet = this;
+            seller.pet = null;
+            buyer.cash -= price;
+            seller.cash += price;
+            System.out.println("Tranzakcja udana.");
+        } else {
+            System.out.println("Tranzakcja nie powiodła się!");
+        }
     }
 }

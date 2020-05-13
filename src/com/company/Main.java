@@ -16,7 +16,7 @@ public class Main {
         me.getLastSalaryCheckInfo();
         me.setSalary(3500.0);
         me.setCar(new Car("Toyota", "C-HR"));
-        System.out.println(me.getCar().getProducer()+ " " + me.getCar().getModel());
+        System.out.println(me.getCar().getProducer() + " " + me.getCar().getModel());
 
         me.pet.takeForAWalk();
         me.pet.takeForAWalk();
@@ -43,5 +43,26 @@ public class Main {
         me.getCar().turnOn();
         System.out.println(me.mobile);
         me.mobile.turnOn();
+
+        Human czlowiek = new Human("Jan", "Kowalski");
+
+        System.out.println();
+        me.getCar().sell(me, czlowiek, 100000.0);
+        System.out.println(me.getCar() + " " + me.cash);
+        System.out.println(czlowiek.getCar() + " " + czlowiek.cash);
+
+        System.out.println();
+        me.mobile.sell(me, czlowiek, 100.0);
+        System.out.println(me.mobile + " " + me.cash);
+        System.out.println(czlowiek.mobile + " " + czlowiek.cash);
+
+        System.out.println();
+        me.pet.sell(me, czlowiek, 100.0);
+        System.out.println(me.pet + " " + me.cash);
+        System.out.println(czlowiek.pet + " " + czlowiek.cash);
+
+        Animal testowyZwierz =  new Animal("Dog");
+        testowyZwierz.sell(me, czlowiek, 100.);
+        //me.sell(me, czlowiek, 100.);
     }
 }
