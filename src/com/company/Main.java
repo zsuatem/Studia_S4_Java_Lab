@@ -1,5 +1,8 @@
 package com.company;
 
+import com.company.creatures.Animal;
+import com.company.creatures.FarmAnimal;
+import com.company.creatures.Pet;
 import com.company.devices.Car;
 import com.company.devices.Phone;
 
@@ -9,7 +12,7 @@ public class Main {
         Human me = new Human();
         me.firstName = "Mateusz";
         me.lastName = "Pawłowski";
-        me.pet = new Animal("Dog");
+        me.pet = new Pet("Dog");
         me.pet.name = "Haiko";
         me.getLastSalaryCheckInfo();
         System.out.println("First salary check. Salary: " + me.getSalary());
@@ -20,8 +23,8 @@ public class Main {
 
         me.pet.takeForAWalk();
         me.pet.takeForAWalk();
+        me.pet.feed(2.0);
         me.pet.takeForAWalk();
-        me.pet.feed();
         me.pet.takeForAWalk();
         me.pet.takeForAWalk();
         me.pet.takeForAWalk();
@@ -61,8 +64,13 @@ public class Main {
         System.out.println(me.pet + " " + me.cash);
         System.out.println(czlowiek.pet + " " + czlowiek.cash);
 
-        Animal testowyZwierz =  new Animal("Dog");
+        Animal testowyZwierz =  new Pet("Dog");
         testowyZwierz.sell(me, czlowiek, 100.);
         //me.sell(me, czlowiek, 100.);
+
+        FarmAnimal cow = new FarmAnimal("Cow");
+        cow.feed(100.0);
+        cow.beEaten();
+        cow.beEaten();
     }
 }

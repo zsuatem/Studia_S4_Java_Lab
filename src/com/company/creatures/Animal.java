@@ -1,8 +1,11 @@
-package com.company;
+package com.company.creatures;
+
+import com.company.Human;
+import com.company.Salleable;
 
 import java.io.File;
 
-public class Animal implements Salleable {
+public abstract class Animal implements Salleable, Feedable {
     final static Double DEFAULT_WEIGHT_DOG = 4.0;
     final static Double DEFAULT_WEIGHT_LION = 190.0;
     final static Double DEFAULT_WEIGHT_MOUSE = 0.01;
@@ -24,20 +27,53 @@ public class Animal implements Salleable {
                 break;
             case "Lion":
                 weight = DEFAULT_WEIGHT_LION;
+            default:
+                weight = 100.0;
         }
     }
 
-    void feed() {
-        if (weight <= 0) {
-            System.out.println("Too late...");
+    boolean isDead() {
+        switch (this.species) {
+            case "Mouse":
+                if (weight <= DEFAULT_WEIGHT_MOUSE * .3) {
+                    return true;
+                }
+                break;
+            case "Dog":
+                if (weight <= DEFAULT_WEIGHT_DOG * .3) {
+                    return true;
+                }
+                break;
+            case "Lion":
+                if (weight <= DEFAULT_WEIGHT_LION * .3) {
+                    return true;
+                }
+                break;
+            default:
+                if (weight <= 0) {
+                    return true;
+                }
+                break;
+        }
+        return false;
+    }
+
+    public void feed() {
+        feed(1.0);
+    }
+
+    @Override
+    public void feed(Double foodWeight) {
+        if (isDead()) {
+            System.out.println("too late, sorry");
         } else {
-            weight++;
-            System.out.println("Thx, yummy.    Weight: " + weight);
+            weight += foodWeight;
+            System.out.println("thx, my weight is now " + weight);
         }
     }
 
-    void takeForAWalk() {
-        if (weight <= 0) {
+    public void takeForAWalk() {
+        if (isDead()) {
             System.out.println("Too late...");
         } else if (weight <= 3) {
             weight--;
