@@ -2,7 +2,7 @@ package com.company.devices;
 
 import com.company.Human;
 
-public class Car extends Device {
+public abstract class Car extends Device {
     private String plates;
     public Double value = 10000.0;
 
@@ -47,4 +47,6 @@ public class Car extends Device {
             System.out.println("Tranzakcja nie powiodła się!");
         }
     }
+
+    public abstract void refuel();
 }
