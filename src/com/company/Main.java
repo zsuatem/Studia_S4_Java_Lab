@@ -135,5 +135,36 @@ public class Main {
         human1.getCar(0).sell(human1, human2, 100.0);
         System.out.println(human2.getCar(0).isExistTransactionBetween(human1, human2));
         System.out.println(human1.getCar(0).getNumberOfTransactions());
+
+        System.out.println("\n\n");
+        Application fejsbruk = new Application("Fejsbruk", "najlepsiejsza", 0.0);
+        Application cwierkacz = new Application("ćwierkacz", "głośna", 0.0);
+        Application wow = new Application("World of work", "tak se", 100.0);
+        Application netplix = new Application("Netplix", "2.4", 5.5);
+
+        me.mobile = new Phone("Samsung", "Galaxy S50");
+        me.mobile.installNewApp(me, fejsbruk);
+        me.mobile.installNewApp(me, cwierkacz);
+        me.mobile.installNewApp(me, wow);
+        me.mobile.installNewApp(me, netplix);
+
+        System.out.println(me.mobile.isInstalled(fejsbruk));
+        System.out.println(me.mobile.isInstalled("ćwierkacz"));
+        System.out.println(me.mobile.isInstalled("instaniegram"));
+
+        me.mobile.getAllFreeInstalledApp();
+        System.out.println(me.mobile.getValueOFAllInstalledApp());
+
+        System.out.println();
+        me.mobile.getAllInstalledApp();
+        me.mobile.sortMyAppsByName();
+        System.out.println();
+        me.mobile.getAllInstalledApp();
+
+        System.out.println();
+        me.mobile.getAllInstalledApp();
+        me.mobile.sortMyAppsByValue();
+        System.out.println();
+        me.mobile.getAllInstalledApp();
     }
 }
