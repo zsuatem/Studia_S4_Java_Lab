@@ -11,6 +11,6 @@ public class ElectricCar extends Car {
     }
 
     public String toString() {
-        return "Electric car: " + this.producer + this.model + this.getPlates();
+        return "Electric car: " + this.producer + " " + this.model + " " + this.getPlates();
     }
 }

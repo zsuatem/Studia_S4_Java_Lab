@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Phone extends Device {
     public Phone(String producer, String model) {
-        super(producer, model);
+        super(producer, model, 100.0);
     }
 
     public String toString() {

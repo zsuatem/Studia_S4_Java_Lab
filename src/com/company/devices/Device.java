@@ -6,10 +6,12 @@ public abstract class Device implements Salleable {
     final String producer;
     final String model;
     public Integer yearOfProduction;
+    public Double value;
 
-    protected Device(String producer, String model) {
+    protected Device(String producer, String model, Double value) {
         this.producer = producer;
         this.model = model;
+        this.value = value;
     }
 
     public String toString() {

@@ -2,10 +2,13 @@ package com.company;
 
 import com.company.creatures.Animal;
 import com.company.devices.Car;
+import com.company.devices.CarComparator;
 import com.company.devices.Device;
 import com.company.devices.Phone;
+import com.sun.istack.internal.Nullable;
 
 import java.sql.Timestamp;
+import java.util.Arrays;
 
 public class Human extends Animal {
     public String firstName;
@@ -13,7 +16,7 @@ public class Human extends Animal {
     public Animal pet;
     public Double cash = 10000.0;
     protected Phone mobile;
-    private Car car;
+    private Car[] garage;
     private Double salary = 3000.0;
     private Timestamp lastSalaryCheckTimestamp;
     private Double lastSalaryCheckValue;
@@ -26,6 +29,14 @@ public class Human extends Animal {
         super("Human");
         this.firstName = firstName;
         this.lastName = lastName;
+        this.garage = new Car[1];
+    }
+
+    public Human(String firstName, String lastName, Integer numberOfParkingSpaces) {
+        super("Human");
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.garage = new Car[numberOfParkingSpaces];
     }
 
     public Double getSalary() {
@@ -53,18 +64,33 @@ public class Human extends Animal {
         }
     }
 
-    public Car getCar() {
-        return car;
+    public Car getCar(Integer numberParkingSpace) {
+        if (numberParkingSpace >= garage.length) {
+            System.out.println("Nie masz takiego miejsca parkingowego w garażu!");
+            return null;
+        } else {
+            return garage[numberParkingSpace];
+        }
     }
 
-    public void setCar(Car car) {
-        this.car = car;
+    public void setCar(Integer numberParkingSpace, Car car) {
+        if (numberParkingSpace >= garage.length) {
+            System.out.println("Nie masz takiego miejsca parkingowego w garażu!");
+        } else if (garage[numberParkingSpace] != null) {
+            System.out.println("To miejsce parkingowe jest już zajęte!");
+        } else {
+            garage[numberParkingSpace] = car;
+        }
     }
 
     public void removeCar(Car car) throws Exception {
         boolean success = false;
         if (hasDevice(car)) {
-            this.car = null;
+            for (Car myCar : garage) {
+                if (myCar == car) {
+                    myCar = null;
+                }
+            }
             success = true;
         }
         if (!success) {
@@ -72,9 +98,36 @@ public class Human extends Animal {
         }
     }
 
-    public boolean hasDevice(Device device) {
+    public Double getTotalValueOfCars() {
+        Double sum = 0.0;
+        for (Car myCar : garage) {
+            if (myCar != null) {
+                sum += myCar.value;
+            }
+        }
+        return sum;
+    }
+
+    @Nullable
+    public Integer getNumberParkingFreeSpace() {
+        for (int i = 0; i < garage.length; i++) {
+            if (garage[i] == null) {
+                return i;
+            }
+        }
+        return null;
+    }
+
+    public void sortMyCarsByYear() {
+        Arrays.sort(garage, new CarComparator());
+    }
+
+    public boolean hasDevice(Device device) throws Exception {
         if (device instanceof Car) {
-            return this.car == device;
+            for (Car myCar : garage) {
+                return myCar == device;
+            }
+            throw new Exception("Nie posiadasz takiego samochodu!");
         } else if (device instanceof Phone) {
             return this.mobile == device;
         }
@@ -89,8 +142,25 @@ public class Human extends Animal {
         return firstName + " " + lastName;
     }
 
-    public boolean couldBuy(Device device, Double price) {
-        return price <= this.cash;
+    public boolean couldBuy(Device device, Double price) throws Exception {
+        if (device instanceof Car) {
+            boolean hasFreeSpace = false;
+            for (Car space : garage) {
+                if (space == null) {
+                    hasFreeSpace = true;
+                }
+            }
+
+            if (!hasFreeSpace) {
+                throw new Exception("Nie masz wolnego miejsca w garażu!");
+            }
+        }
+
+        if (price <= this.cash) {
+            return true;
+        } else {
+            throw new Exception("Nie masz wystarczajacej ilości gotówki!");
+        }
     }
 
     public boolean couldBuy(Animal pet, Double price) {

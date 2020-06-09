@@ -11,6 +11,6 @@ public class DieselCar extends Car {
     }
 
     public String toString() {
-        return "Diesel car: " + this.producer + this.model + this.getPlates();
+        return "Diesel car: " + this.producer + " " + this.model + " " + this.getPlates();
     }
 }

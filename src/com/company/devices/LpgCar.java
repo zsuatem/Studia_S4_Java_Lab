@@ -11,6 +11,6 @@ public class LpgCar extends Car {
     }
 
     public String toString() {
-        return "LPG car: " + this.producer + this.model + this.getPlates();
+        return "LPG car: " + this.producer + " " + this.model + " " + this.getPlates();
     }
 }
