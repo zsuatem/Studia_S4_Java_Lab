@@ -148,6 +148,7 @@ public class Human extends Animal {
             for (Car space : garage) {
                 if (space == null) {
                     hasFreeSpace = true;
+                    break;
                 }
             }
 

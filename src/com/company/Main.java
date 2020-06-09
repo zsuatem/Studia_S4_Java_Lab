@@ -21,7 +21,8 @@ public class Main {
         System.out.println("First salary check. Salary: " + me.getSalary());
         me.getLastSalaryCheckInfo();
         me.setSalary(3500.0);
-        me.setCar(0, new ElectricCar("Toyota", "C-HR"));
+        Car carToyota = new ElectricCar("Toyota", "C-HR");
+        carToyota.buyAsNew(me);
         me.getCar(0).yearOfProduction = 2019;
         System.out.println(me.getCar(0).getProducer() + " " + me.getCar(0).getModel());
 
@@ -85,7 +86,7 @@ public class Main {
         czlowiek.mobile.installAnApp("Ćwierkacz", "dev", "najlepszeapki.pl");
 
         System.out.println();
-        List<String> apki = new ArrayList<String>();
+        List<String> apki = new ArrayList<>();
         apki.add("FB");
         apki.add("TW");
         czlowiek.mobile.installAnApp(apki);
@@ -98,8 +99,10 @@ public class Main {
         me.getCar(0).refuel();
 
 
-        me.setCar(2, new DieselCar("Peugeot", "308"));
-        me.getCar(2).yearOfProduction = 2018;
+        me.cash = 1000000.0;
+        Car carPeugeot = new DieselCar("Peugeot", "308");
+        carPeugeot.buyAsNew(me);
+        me.getCar(1).yearOfProduction = 2018;
 
         System.out.println();
         System.out.println(me.getTotalValueOfCars());
@@ -121,5 +124,16 @@ public class Main {
                 System.out.println("\t" + me.getCar(i).yearOfProduction);
             }
         }
+
+        System.out.println();
+        System.out.println("Czy: " + me + " był właścicielem tego pojazdu: " + me.getCar(0).wasOwner(me));
+
+        Human human1 = new Human("Jan", "Kowalski");
+        Car car = new DieselCar("Peugeot", "207");
+        car.buyAsNew(human1);
+        Human human2 = new Human("Jan", "Nowak");
+        human1.getCar(0).sell(human1, human2, 100.0);
+        System.out.println(human2.getCar(0).isExistTransactionBetween(human1, human2));
+        System.out.println(human1.getCar(0).getNumberOfTransactions());
     }
 }
